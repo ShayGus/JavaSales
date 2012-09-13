@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system maxAuctionAtATime="5">
+	<sales>
+		<item name="item1" initPrice="8" liftTimeInSeconds="5" type="bid" />
+		<item name="item2" initPrice="10" liftTimeInSeconds="3" type="auction" />
+		<item name="item3" initPrice="20" liftTimeInSeconds="3" type="auction" />
+		<item name="item4" initPrice="9" liftTimeInSeconds="5" type="bid" />
+		<item name="item5" initPrice="13" liftTimeInSeconds="8" type="bid" />
+	</sales>
+	<customers>
+		<client name="gogo" mail="gogo@gmail.com" whileWaiting="surfing"
+			product="item1" price="10" />
+		<client name="momo" mail="momo@gmail.com" whileWaiting="reading"
+			product="item1" price="12" />
+		<client name="dudu" mail="dudu@gmail.com" whileWaiting="surfin"
+			product="item2" price="15" />
+		<client name="dado" mail="dado@gmail.com" whileWaiting="reading"
+			product="item2" price="17" />
+		<client name="duda" mail="duda@gmail.com" whileWaiting="reading"
+			product="item2" price="17" />
+	</customers>
+</system>
