@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import LoggerPKG.SaleFormatter;
@@ -19,6 +20,7 @@ public abstract class Sale extends Thread{
 	public List<IAllowedBidsEventListener> bidderListeners = new ArrayList<IAllowedBidsEventListener>();
 	protected Logger logger;
 	protected FileHandler logHandler;
+	protected String[] logPerfs = new String[2];
 	
 	
 	public Sale(String productName, float initialPrice) throws SecurityException, IOException{
@@ -28,6 +30,11 @@ public abstract class Sale extends Thread{
 		logHandler = new FileHandler(productName + ".log");
 		logHandler.setFormatter(new SaleFormatter());
 		logger.addHandler(logHandler);
+		logger.setUseParentHandlers(false);
+		
+		logPerfs[0] = this.getClass().getSimpleName();
+		logPerfs[1] = "Sale Begin";
+		logger.log(Level.INFO, "Ok", logPerfs);
 	}
 	
 	public String getSaleName() {
