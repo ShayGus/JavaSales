@@ -1,7 +1,12 @@
 package GoupSales;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+
+import LoggerPKG.SaleFormatter;
 
 
 
@@ -12,10 +17,17 @@ public abstract class Sale extends Thread{
 	public Customer winningCustomer = null;
 	protected boolean allCustomersUp = false;
 	public List<IAllowedBidsEventListener> bidderListeners = new ArrayList<IAllowedBidsEventListener>();
+	protected Logger logger;
+	protected FileHandler logHandler;
 	
-	public Sale(String productName, float initialPrice){
+	
+	public Sale(String productName, float initialPrice) throws SecurityException, IOException{
 		this.productName = productName;
 		this.initialPrice = initialPrice;
+		logger = Logger.getLogger(productName);
+		logHandler = new FileHandler(productName + ".log");
+		logHandler.setFormatter(new SaleFormatter());
+		logger.addHandler(logHandler);
 	}
 	
 	public String getSaleName() {

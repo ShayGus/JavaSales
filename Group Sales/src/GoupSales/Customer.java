@@ -1,7 +1,13 @@
 package GoupSales;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import LoggerPKG.SaleFormatter;
 
 public class Customer extends Thread implements IAllowedBidsEventListener{
 	private String custName;
@@ -14,8 +20,12 @@ public class Customer extends Thread implements IAllowedBidsEventListener{
 	private Random rndUp = new Random();
 	private float nextUP;
 	private boolean ended = false;
+	
+	private Logger logger;
+	private FileHandler logHandler;
+	private String[] params = new String[2];
 
-	public Customer(String custName, String eMail, String product, float maxPrice, String actionWhileWaiting, Map<String, Sale> sales){
+	public Customer(String custName, String eMail, String product, float maxPrice, String actionWhileWaiting, Map<String, Sale> sales) throws SecurityException, IOException{
 		this.custName = custName;
 		this.seteMail(eMail);
 		this.setProduct(product);
@@ -24,6 +34,16 @@ public class Customer extends Thread implements IAllowedBidsEventListener{
 		this.sales = sales;
 		nextUP = rndUp.nextFloat();
 		registerSale();
+		
+		logger = Logger.getLogger(custName);
+		logHandler = new FileHandler(custName + ".log");
+		logHandler.setFormatter(new SaleFormatter());
+		logger.addHandler(logHandler);
+		logger.setUseParentHandlers(false);
+		
+		params[1] = "Registering";
+		params[0] = custName;
+		logger.log(Level.INFO, "Ok", params);
 	}
 	
 	private void registerSale(){

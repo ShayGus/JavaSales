@@ -1,5 +1,7 @@
 package GoupSales;
 
+import java.io.IOException;
+
 public class Auction extends Sale implements IBidEventListener, ITimerListener{
 	
 	private int liftTimeInSeconds;
@@ -9,7 +11,7 @@ public class Auction extends Sale implements IBidEventListener, ITimerListener{
 	private Timer timer;
 
 
-	public Auction(String name, float initialPrice, int liftTimeInSeconds) {
+	public Auction(String name, float initialPrice, int liftTimeInSeconds) throws SecurityException, IOException {
 		super(name, initialPrice);
 		this.liftTimeInSeconds = liftTimeInSeconds;
 		currentPrice = initialPrice;

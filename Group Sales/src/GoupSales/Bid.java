@@ -1,5 +1,6 @@
 package GoupSales;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,7 +15,7 @@ public class Bid extends Sale implements IBidEventListener, ITimerListener{
 	private boolean timeEnded = false;  
 	private Customer winner;
 	
-	public Bid(String name, float initialPrice, int endTime) {
+	public Bid(String name, float initialPrice, int endTime) throws SecurityException, IOException {
 		super(name, initialPrice);
 		this.endTime = endTime;
 		timer = new Timer(endTime);
